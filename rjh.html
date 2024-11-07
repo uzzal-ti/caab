@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAAB Profit & Loss Statement Dashboard</title>
+    <link rel="stylesheet" href="overview.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Add the CAAB Logo as a Favicon -->
+    <link rel="icon" href="images/caab-logo.png" type="image/png">
+    <header>
+        <div class="logo">
+            <img src="images/caab-logo.png" alt="CAAB Logo" class="header-icon">
+        </div>
+        <div class="top-nav">
+            <!-- Add CAAB Icon on the left side of the navigation -->
+            <img src="images/caab-logo.png" alt="CAAB Icon" class="caab-icon">
+            <button class="report-btn">Generate Report</button>
+            <button class="download-btn">Download</button>
+            <span class="menu-toggle" id="menu-toggle">&#9776;</span> <!-- Hamburger Icon -->
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="overview.html">Overview</a></li>
+            <li><a href="dac.html">Hazrat Shahjalal International Airport (DAC)</a></li>
+            <li><a href="cgp.html">Shah Amanat International Airport (CGP)</a></li>
+            <li><a href="zyl.html">Osmani International Airport (ZYL)</a></li>
+            <li><a href="cxb.html">Cox's Bazar International Airport (CXB)</a></li>
+            <li><a href="jsr.html">Jashore Airport (JSR)</a></li>
+            <li><a href="rjh.html">Shah Makhdum Airport (RJH)</a></li>
+            <li><a href="saidpur.html">Saidpur Airport</a></li>
+            <li><a href="bzl.html">Barishal Airport (BZL)</a></li>
+            <li><a href="ishurdi.html">Ishurdi Airport</a></li>
+            <li><a href="tejgaon.html">Tejgaon Airport (Dhaka)</a></li>
+            <li><a href="bogura.html">Bogura Airport</a></li>
+            <li><a href="shamshernagar.html">Shamshernagar Airport (STOL, Kurigram)</a></li>
+            <li><a href="cumilla.html">Cumilla Airport (STOL)</a></li>
+            <li><a href="thakurgaon.html">Thakurgaon Airport</a></li>
+            <li><a href="khanjahanali.html">Khan Jahan Ali Airport (Under Construction)</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Shah Makhdum Airport - Profit & Loss Statement</h1>
+
+        <!-- Revenue and Expenses Summary -->
+        <div class="overview-metrics">
+            <div class="metric">
+                <h2>Total Revenue</h2>
+                <div class="metric-value positive">$5,000,000</div>
+            </div>
+            <div class="metric">
+                <h2>Total Expenses</h2>
+                <div class="metric-value negative">$3,000,000</div>
+            </div>
+            <div class="metric">
+                <h2>Net Income</h2>
+                <div class="metric-value positive">$2,000,000</div>
+            </div>
+        </div>
+
+        <!-- Year-over-Year Comparison Chart -->
+        <div class="chart-container">
+            <h2>Year-over-Year (YoY) Comparison</h2>
+            <canvas id="yoYChart"></canvas>
+        </div>
+
+          <!-- Total Profit & Loss Statement -->
+          <div class="overview-metrics">
+            <div class="metric">
+                <h2>Total Revenue (All Airports)</h2>
+                <div class="metric-value positive">$10,000,000</div>
+            </div>
+            <div class="metric">
+                <h2>Total Expenses (All Airports)</h2>
+                <div class="metric-value negative">$6,000,000</div>
+            </div>
+            <div class="metric">
+                <h2>Total Net Income (All Airports)</h2>
+                <div class="metric-value positive">$4,000,000</div>
+            </div>
+        </div>
+
+        <!-- Revenue Breakdown Section -->
+        <div class="chart-container">
+            <h2>Aeronautical Revenue Breakdown</h2>
+            <canvas id="aeroRevenueChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Non-Aeronautical Revenue Breakdown</h2>
+            <canvas id="nonAeroRevenueChart"></canvas>
+        </div>
+
+        <!-- Expense Breakdown Section -->
+        <div class="chart-container">
+            <h2>Operating Expenses Breakdown</h2>
+            <canvas id="operatingExpenseChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Capital Expenditures Breakdown</h2>
+            <canvas id="capitalExpenseChart"></canvas>
+        </div>
+
+        <!-- Quarter-over-Quarter Comparison Chart -->
+        <div class="chart-container">
+            <h2>Quarter-over-Quarter (QoQ) Comparison</h2>
+            <canvas id="qoQChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Dummy Web Page</p>
+        <p> Designed by Uzzal C. Boissha</p>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // Sample data for Year-over-Year (YoY) Comparison
+        const yoYData = {
+            labels: ['2019', '2020', '2021', '2022', '2023'],
+            datasets: [
+                {
+                    label: 'Revenue (in $)',
+                    data: [4000000, 3500000, 3800000, 4500000, 5000000],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Expenses (in $)',
+                    data: [2000000, 2100000, 2300000, 2700000, 3000000],
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Sample data for Quarter-over-Quarter (QoQ) Comparison
+        const qoQData = {
+            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+            datasets: [
+                {
+                    label: 'Revenue (in $)',
+                    data: [1200000, 1300000, 1400000, 1100000],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Expenses (in $)',
+                    data: [800000, 750000, 820000, 650000],
+                    backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Render Year-over-Year (YoY) Chart
+        const yoYChartCtx = document.getElementById('yoYChart').getContext('2d');
+        new Chart(yoYChartCtx, {
+            type: 'bar',
+            data: yoYData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Year-over-Year (YoY) Revenue & Expenses'
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Sample data for Aeronautical Revenue Breakdown
+        const aeroRevenueData = {
+            labels: ['Landing Fees', 'Passenger Fees', 'Aircraft Parking Fees', 'Navigation Charges', 'Overflight Fees'],
+            datasets: [{
+                label: 'Aeronautical Revenue (in $)',
+                data: [2500000, 2000000, 1500000, 1000000, 500000],
+                backgroundColor: ['#FF5733', '#FF8D1A', '#FFEC3D', '#1F85A6', '#34D7D2'],
+                borderColor: ['#FF5733', '#FF8D1A', '#FFEC3D', '#1F85A6', '#34D7D2'],
+                borderWidth: 1
+            }]
+        };
+
+        // Sample data for Non-Aeronautical Revenue Breakdown
+        const nonAeroRevenueData = {
+            labels: ['Retail Sales', 'Car Parking Fees', 'Advertising Revenue', 'Rental Income', 'Miscellaneous Income'],
+            datasets: [{
+                label: 'Non-Aeronautical Revenue (in $)',
+                data: [3000000, 1000000, 500000, 1500000, 200000],
+                backgroundColor: ['#9B59B6', '#3498DB', '#2ECC71', '#E74C3C', '#F39C12'],
+                borderColor: ['#9B59B6', '#3498DB', '#2ECC71', '#E74C3C', '#F39C12'],
+                borderWidth: 1
+            }]
+        };
+
+        // Sample data for Operating Expenses Breakdown
+        const operatingExpensesData = {
+            labels: ['Salaries', 'Utilities', 'Maintenance', 'Insurance', 'Marketing', 'Administrative Costs'],
+            datasets: [{
+                label: 'Operating Expenses (in $)',
+                data: [1000000, 500000, 400000, 300000, 600000, 200000],
+                backgroundColor: ['#FFC300', '#DAF7A6', '#FF5733', '#C70039', '#900C3F', '#581845'],
+                borderColor: ['#FFC300', '#DAF7A6', '#FF5733', '#C70039', '#900C3F', '#581845'],
+                borderWidth: 1
+            }]
+        };
+
+        // Sample data for Capital Expenditures Breakdown
+        const capitalExpenditureData = {
+            labels: ['Infrastructure Investments', 'Equipment Purchases', 'Property Acquisitions'],
+            datasets: [{
+                label: 'Capital Expenditures (in $)',
+                data: [2000000, 1000000, 500000],
+                backgroundColor: ['#3498DB', '#2ECC71', '#E74C3C'],
+                borderColor: ['#3498DB', '#2ECC71', '#E74C3C'],
+                borderWidth: 1
+            }]
+        };
+
+        // Render Aeronautical Revenue Breakdown Chart
+        const aeroRevenueChartCtx = document.getElementById('aeroRevenueChart').getContext('2d');
+        new Chart(aeroRevenueChartCtx, {
+            type: 'pie',
+            data: aeroRevenueData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Aeronautical Revenue Breakdown'
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Render Non-Aeronautical Revenue Breakdown Chart
+        const nonAeroRevenueChartCtx = document.getElementById('nonAeroRevenueChart').getContext('2d');
+        new Chart(nonAeroRevenueChartCtx, {
+            type: 'pie',
+            data: nonAeroRevenueData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Non-Aeronautical Revenue Breakdown'
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Render Operating Expenses Breakdown Chart
+        const operatingExpenseChartCtx = document.getElementById('operatingExpenseChart').getContext('2d');
+        new Chart(operatingExpenseChartCtx, {
+            type: 'pie',
+            data: operatingExpensesData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Operating Expenses Breakdown'
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Render Capital Expenditures Breakdown Chart
+        const capitalExpenseChartCtx = document.getElementById('capitalExpenseChart').getContext('2d');
+        new Chart(capitalExpenseChartCtx, {
+            type: 'pie',
+            data: capitalExpenditureData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Capital Expenditures Breakdown'
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Render Quarter-over-Quarter (QoQ) Chart
+        const qoQChartCtx = document.getElementById('qoQChart').getContext('2d');
+        new Chart(qoQChartCtx, {
+            type: 'bar',
+            data: qoQData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Quarter-over-Quarter (QoQ) Revenue & Expenses'
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
